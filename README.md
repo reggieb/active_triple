@@ -9,7 +9,7 @@ near a given location:
 
 within 30km of a location
 
-    ActiveTriple.location('London', '30km').all
+    ActiveTriple.location('London', '30km')
 
 with a title of "This article"
 
@@ -42,7 +42,7 @@ By default, queries are limited to return ten items. This can be overwritten.
 Accessing the data
 ------------------
 
-    Each of the above searches will return an ActiveTriple instance. To access
+Each of the above searches will return an ActiveTriple instance. To access
 the data returned by the query, either use 'all' or use an Array method.
 
 Get all the items:
@@ -57,4 +57,6 @@ No items found
 --------------
 If the query returns no items, an empty array will be returned when an attempt
 is made to access the data.
+
+    ActiveTriple.mentions('XXXXYYYY').all  ---> []
 
