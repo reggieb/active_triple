@@ -13,4 +13,16 @@ class SearchTest < Test::Unit::TestCase
     assert(article['places'].select{|p| p['name'] == 'Birmingham'}.length > 0)
   end
   
+  def test_text
+    article = ActiveTriple.location('London').first
+    search = ActiveTriple.title(article['title'])
+    assert_equal(1, search.length)
+    assert_equal(article, search.first)
+  end
+  
+  def test_where
+    title = ActiveTriple.location('London').first['title']
+    assert_equal(ActiveTriple.title(title).first, ActiveTriple.where('dc:terms:title' => "text:en:\"#{title}\"").first)
+  end
+  
 end
