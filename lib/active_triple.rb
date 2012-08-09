@@ -1,6 +1,7 @@
 require_relative 'active_triple/search'
 require 'typhoeus'
 require 'json'
+require 'triple_parser'
 
 class ActiveTriple
   def initialize
@@ -36,7 +37,7 @@ class ActiveTriple
   end
 
   def triples
-    @triples.join(' ')
+    TripleParser.to_rdf(@triples.join("\n")).join("\n")
   end
   
   def self.binding_id
