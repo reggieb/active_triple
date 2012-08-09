@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ffi (1.1.4)
+    json (1.7.4)
+    mime-types (1.19)
+    typhoeus (0.4.2)
+      ffi (~> 1.0)
+      mime-types (~> 1.18)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  json
+  typhoeus
