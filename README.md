@@ -11,14 +11,6 @@ within 30km of a location
 
     ActiveTriple.location('London', '30km')
 
-with a title of "This article"
-
-    ActiveTriple.title('This article')
-
-or
-
-    ActiveTriple.where('dc:terms:title' => "text:en:\"This article\"")
-
 about a resource
 
     ActiveTriple.about('London')
@@ -26,6 +18,23 @@ about a resource
 mentions a resource
 
     ActiveTriple.mentions('London')
+
+with a title of "This article"
+
+    ActiveTriple.title('This article')
+
+Using where
+-----------
+
+The title query can also be made using a where clause, with the key matching
+the predicate, and the value matching the object. The where method accepts
+both colon delimited style triples and bracketed url style triples 
+
+    ActiveTriple.where('dc:terms:title' => 'text:en:"This article"')
+
+or
+
+    ActiveTriple.where('<http://purl.org/dc/terms/title>' => '"This article"@en')
 
 Combining queries
 -----------------
