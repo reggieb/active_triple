@@ -12,4 +12,8 @@ class ActiveTripleTest < Test::Unit::TestCase
     assert_equal(1, ActiveTriple.location('London').limit(1).length)
     assert_equal(1, ActiveTriple.limit(1).location('London').length)
   end
+  
+  def test_failure_to_find_anything
+    assert_equal([], ActiveTriple.mentions('SSDDDDFFF').all)
+  end
 end

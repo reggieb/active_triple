@@ -63,8 +63,16 @@ class ActiveTriple
   
   def get_data
     resp = by_post
-    json = JSON.parse(resp.body)
-    json.first[1] # this returns array of articles. Not sure why decode isn't returning a hash with key 'articles' and value as the array of articles
+    begin
+      json = JSON.parse(resp.body)
+      json.first[1] # this returns array of articles. Not sure why decode isn't returning a hash with key 'articles' and value as the array of articles
+    rescue JSON::ParserError => e
+      if /No stories found for query/ =~ e.message
+        return Array.new
+      else
+        raise e
+      end
+    end
   end
   
   def by_post

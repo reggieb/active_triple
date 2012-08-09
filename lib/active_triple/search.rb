@@ -4,7 +4,7 @@ class ActiveTriple
     
     # At the moment, I think this is the only search method that is working.
     def self.location(place_name, radius = '5mi')
-      statements = [
+      [
         %Q{resource:#{place_name} geo-pos:lat ?Latitude .},
         %Q{resource:#{place_name} geo-pos:long ?Longitude .},
         %Q{?location omgeo:nearby(?Latitude ?Longitude "#{radius}") .},
@@ -24,6 +24,7 @@ class ActiveTriple
       %Q{#{ActiveTriple.binding_variable} dc:terms:subject resource:#{text} .}
     end
     
+    # ActiveTriple.where('dc:terms:subject' => 'resource:London') is equivalent to ActiveTriple.subject('London')
     def self.where(hash)
       statements = Array.new
       hash.each{|predicate, object| statements << %Q{#{ActiveTriple.binding_variable} #{predicate} #{object} .}}
