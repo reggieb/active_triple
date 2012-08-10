@@ -46,7 +46,7 @@ Limiting queries
 By default, queries are limited to return ten items. This can be overwritten.
 
     ActiveTriple.location('London').limit(2)
-    ActiveTriple.location('London').limit(20)
+    ActiveTriple.limit(20).location('London')
 
 Accessing the data
 ------------------
