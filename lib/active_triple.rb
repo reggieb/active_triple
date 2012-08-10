@@ -2,6 +2,7 @@ require_relative 'active_triple/search'
 require 'typhoeus'
 require 'json'
 require 'triple_parser'
+require 'hashie'
 
 class ActiveTriple
   def initialize
@@ -65,7 +66,9 @@ class ActiveTriple
     resp = by_post
     begin
       json = JSON.parse(resp.body)
-      json.first[1] # this returns array of articles. Not sure why decode isn't returning a hash with key 'articles' and value as the array of articles
+      results = json.first[1]
+      results.collect!{|a| Hashie::Mash.new(a)}
+      return results
     rescue JSON::ParserError => e
       if /No stories found for query/ =~ e.message
         return Array.new

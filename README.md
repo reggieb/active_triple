@@ -43,6 +43,7 @@ Combining queries
 
 Limiting queries
 ----------------
+
 By default, queries are limited to return ten items. This can be overwritten.
 
     ActiveTriple.location('London').limit(2)
@@ -60,7 +61,22 @@ Get all the items:
 
 Get the title of each of the items:
 
-    ActiveTriple.location('London').collect{|a| a['title']}
+    ActiveTriple.location('London').collect{|a| a.title}
+
+Items returned as objects
+-------------------------
+
+Notice in the last example, that the item is an object with a method title.
+Hashie is used to convert the data from it's native hash to an object. The
+native hash is nested and this is reflected in the structure of the object.
+
+To return the body text of the first item:
+
+    ActiveTriple.location('London').first.full_data.body
+
+To return the original hash:
+
+    ActiveTriple.location('London').first.to_hash
 
 No items found
 --------------

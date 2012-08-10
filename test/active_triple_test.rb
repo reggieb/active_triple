@@ -16,4 +16,11 @@ class ActiveTripleTest < Test::Unit::TestCase
   def test_failure_to_find_anything
     assert_equal([], ActiveTriple.mentions('SSDDDDFFF').all)
   end
+  
+  def test_objects_returned
+    item = ActiveTriple.location('London').first
+    assert_nothing_raised NoMethodError do
+      assert(item.title.kind_of?(String), "Item title should return text")
+    end
+  end
 end
