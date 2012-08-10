@@ -38,7 +38,7 @@ class ActiveTriple
   end
 
   def triples
-    TripleParser.to_rdf(@triples.join("\n")).join("\n")
+    TripleParser.to_rdf(@triples).join("\n")
   end
   
   def self.binding_id

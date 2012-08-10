@@ -2,9 +2,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     ffi (1.1.5)
+    hashie (1.2.0)
     json (1.7.4)
     mime-types (1.19)
-    triple_parser (0.1.7)
+    triple_parser (0.1.8)
     typhoeus (0.4.2)
       ffi (~> 1.0)
       mime-types (~> 1.18)
@@ -13,6 +14,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  hashie
   json
   triple_parser
   typhoeus
