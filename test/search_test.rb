@@ -25,4 +25,15 @@ class SearchTest < Test::Unit::TestCase
     assert_equal(ActiveTriple.title(title).first, ActiveTriple.where('dc:terms:title' => "text:en:\"#{title}\"").first)
   end
   
+  def test_about
+    assert(!ActiveTriple.about('United_Kingdom').empty?)
+    assert_equal(ActiveTriple.about('United_Kingdom').all, ActiveTriple.about('United Kingdom').all)
+  end
+  
+  def test_mentions
+    assert(!ActiveTriple.mentions('United_Kingdom').empty?)
+    assert_equal(ActiveTriple.mentions('United_Kingdom').all, ActiveTriple.mentions('United Kingdom').all)
+    assert_not_equal(ActiveTriple.about('United_Kingdom').all, ActiveTriple.mentions('United Kingdom').all)
+  end  
+  
 end

@@ -13,11 +13,11 @@ class ActiveTriple
     end
     
     def self.about(text)
-      %Q{#{ActiveTriple.binding_variable} ontology:about resource:#{text} .}
+      %Q{#{ActiveTriple.binding_variable} ontology:about resource:#{underscore_spaces(text)} .}
     end
     
     def self.mentions(text)
-      %Q{#{ActiveTriple.binding_variable} ontology:mentions resource:#{text} .}
+      %Q{#{ActiveTriple.binding_variable} ontology:mentions resource:#{underscore_spaces(text)} .}
     end
     
     def self.subject(text)
@@ -33,6 +33,10 @@ class ActiveTriple
     
     def self.title(text)
       %Q{#{ActiveTriple.binding_variable} dc:terms:title text:en:"#{text}" .}
-    end    
+    end  
+    
+    def self.underscore_spaces(text)
+      text.gsub(/\s+/, "_")
+    end
   end
 end
