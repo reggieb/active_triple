@@ -79,16 +79,5 @@ class ActiveTriple
     )  
     connection.response
   end
-  
-  def by_post
-    Typhoeus::Request.post(post_url, {
-      :headers => { 'Content-Type' => 'text/plain' },
-      :body    => triples
-    })
-  end
-  
-  
-  def post_url
-    "http://juicer.responsivenews.co.uk/api/articles.json?binding=#{self.class.binding_id}&limit=#{number_of_items}"
-  end  
+   
 end

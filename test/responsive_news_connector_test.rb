@@ -21,11 +21,6 @@ class ActiveTriple
         assert_equal('?binding=test&limit=8', @connection.url_variables)
       end
       
-      def test_url_variable_without_limit
-        @connection.set_url_variables(:binding => 'test')
-        assert_equal('?binding=test&limit=10', @connection.url_variables)
-      end
-      
       def test_send_by_post
         triples = ActiveTriple.location('London').triples
         binding = ActiveTriple.binding_id

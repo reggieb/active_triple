@@ -3,38 +3,28 @@ class ActiveTriple
 
     class TripleStoreConnector
 
-      attr_reader :url_variables, :triples
-
       def initialize
 
       end
 
-      def path
-        raise "Connection target url not set"
-      end
-
-      def set_url_variables(variables = {})
-        @url_variables = build_varible_string(variables)
-      end
-
-      def url
-        [path, url_variables].join
-      end
-      
+     
+      # Method used to initial a connection and send data.
       def self.send_data(args = {})
+        required_arguments.each{|arg| raise "args must include :#{arg}" unless args.keys.include?(arg.to_sym)}
         raise "Need to define how connector sends data to server"
       end
 
+      # Response should be an array of objects holding the data returned by the server
+      # or an empty array
       def response
         raise "Need to define how connector handles response"
       end
-
-      private
-      def build_varible_string(variables)
-        variables[:limit] = 10 unless variables[:limit]
-        parts = variables.to_a.collect{|v| v.join("=")}
-        "?#{parts.join('&')}"
+      
+      def self.required_arguments
+        %w{triples binding limit}
       end
+
+      
     end
 
   end
