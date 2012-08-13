@@ -1,6 +1,38 @@
 ActiveTriple: a tool to search a triple store
 =============================================
 
+Configuration
+-------------
+Before you can use ActiveTriple, you must set up a connector and
+associate it with ActiveTriple.
+
+    ActiveTriple.set_connector(MyConnector)
+
+Two connector templates are provided:
+
+ActiveTriple::Connectors::TripleStoreConnector
+---------------------------------------------
+
+A very basic connector, that shows the minimum requirement for a connector.
+
+ActiveTriple::Connectors::PostToUrlConnector
+----------------------------------------------
+This connector provides a connection to a server via HTTP post. If you have
+a server that will return json data to a posted request, you can inherit
+from this class to make a simple connector. For example:
+
+    class MyConnector < ActiveTriple::Connectors::PostToUrlConnector
+      def path
+        @path = 'http://path/to/the/server'
+      end
+    end
+
+    ActiveTriple.set_connector MyConnector
+
+
+Usage
+-----
+
 To search for items: 
 
 near a given location:

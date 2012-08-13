@@ -4,7 +4,7 @@ require 'hashie'
 
 class ActiveTriple
   module Connectors
-    class ResponsiveNewsConnector < TripleStoreConnector
+    class PostToUrlConnector < TripleStoreConnector
       attr_reader :url_variables, :triples
       
     
@@ -36,7 +36,7 @@ class ActiveTriple
       end
       
       def path
-        @path = 'http://juicer.responsivenews.co.uk/api/articles.json'  
+        raise 'Need to define path to server'  
       end      
       
       def set_url_variables(variables = {})

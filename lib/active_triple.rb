@@ -8,7 +8,7 @@ class ActiveTriple
     
   end
   
-  @@connector = Connectors::ResponsiveNewsConnector
+  @@connector = Connectors::PostToUrlConnector 
   
   def method_missing(m, *args, &block)
     if Search.respond_to?(m)

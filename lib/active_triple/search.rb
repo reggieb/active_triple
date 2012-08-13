@@ -1,4 +1,3 @@
-
 class ActiveTriple
   module Search
     

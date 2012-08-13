@@ -6,7 +6,6 @@ class ActiveTriple
       def initialize
 
       end
-
      
       # Method used to initial a connection and send data.
       def self.send_data(args = {})
@@ -20,6 +19,7 @@ class ActiveTriple
         raise "Need to define how connector handles response"
       end
       
+      private
       def self.required_arguments
         %w{triples binding limit}
       end

@@ -6,14 +6,9 @@ require 'active_triple'
 class ActiveTriple
   module Connectors
     
-    class ResponsiveNewsConnectorTest < Test::Unit::TestCase
+    class PostToUrlConnectorTest < Test::Unit::TestCase
       def setup
-        @connection = ResponsiveNewsConnector.new
-        @target_path = 'http://juicer.responsivenews.co.uk/api/articles.json'
-      end
-      
-      def test_path
-        assert_equal(@target_path, @connection.path)
+        @connection = PostToUrlConnector.new
       end
       
       def test_url_variables
@@ -26,13 +21,13 @@ class ActiveTriple
         binding = ActiveTriple.binding_id
         limit = 8
         connection = (
-          ResponsiveNewsConnector.send_data(
+          PostToUrlConnector.send_data(
             :binding => binding,
             :limit => limit,
             :triples => triples           
           )
         )
-        expected_url = "#{@target_path}?binding=#{binding}&limit=#{limit}"
+        expected_url = "#{@connection.path}?binding=#{binding}&limit=#{limit}"
         assert_equal(expected_url, connection.url)
         assert_equal(triples, connection.triples)
         assert(connection.response.kind_of?(Array), "Response should be an array")
