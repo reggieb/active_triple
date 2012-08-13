@@ -3,7 +3,7 @@ class ActiveTriple
   module Search
     
     # At the moment, I think this is the only search method that is working.
-    def self.location(place_name, radius = '5mi')
+    def self.location(place_name, radius = '8km')
       [
         %Q{resource:#{place_name} geo-pos:lat ?Latitude .},
         %Q{resource:#{place_name} geo-pos:long ?Longitude .},

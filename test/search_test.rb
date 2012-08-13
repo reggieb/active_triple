@@ -10,7 +10,7 @@ class SearchTest < Test::Unit::TestCase
   
   def test_location_returns_articles_with_places_including_location
     article = ActiveTriple.location('Birmingham').first
-    assert(article['places'].select{|p| p['name'] == 'Birmingham'}.length > 0)
+    assert_near_birmingam(article)
   end
   
   def test_text
@@ -35,5 +35,16 @@ class SearchTest < Test::Unit::TestCase
     assert_equal(ActiveTriple.mentions('United_Kingdom').all, ActiveTriple.mentions('United Kingdom').all)
     assert_not_equal(ActiveTriple.about('United_Kingdom').all, ActiveTriple.mentions('United Kingdom').all)
   end  
+  
+  def assert_near_birmingam(article)
+    brum_box = {:N => 52.53, :E => -1.82, :S => 52.44, :W => -1.97}
+    places = article.places.select do |p| 
+      p.longitude.to_f < brum_box[:E].to_f &&
+      p.latitude.to_f < brum_box[:N].to_f &&
+      p.latitude.to_f > brum_box[:S].to_f &&
+      p.longitude.to_f > brum_box[:W].to_f
+    end
+    assert(places.length > 0, "Location should be inside the brum box")
+  end
   
 end
