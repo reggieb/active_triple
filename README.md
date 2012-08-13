@@ -10,13 +10,12 @@ associate it with ActiveTriple.
 
 Two connector templates are provided:
 
-ActiveTriple::Connectors::TripleStoreConnector
----------------------------------------------
+### ActiveTriple::Connectors::TripleStoreConnector
 
 A very basic connector, that shows the minimum requirement for a connector.
 
-ActiveTriple::Connectors::PostToUrlConnector
-----------------------------------------------
+### ActiveTriple::Connectors::PostToUrlConnector
+
 This connector provides a connection to a server via HTTP post. If you have
 a server that will return json data to a posted request, you can inherit
 from this class to make a simple connector. For example:
@@ -28,6 +27,14 @@ from this class to make a simple connector. For example:
     end
 
     ActiveTriple.set_connector MyConnector
+
+TripleParser
+------------
+
+ActiveTriple uses TripleParser, and therefore you should also configure
+TripleParser so that it works for your environment:
+
+    TripleParser::Settings.application_domain = 'your.domain.com'
 
 
 Usage
