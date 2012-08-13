@@ -1,13 +1,14 @@
 require_relative 'active_triple/search'
-require 'typhoeus'
+require_relative 'active_triple/connectors/connectors.rb'
 require 'json'
 require 'triple_parser'
-require 'hashie'
 
 class ActiveTriple
   def initialize
     
   end
+  
+  @@connector = Connectors::ResponsiveNewsConnector
   
   def method_missing(m, *args, &block)
     if Search.respond_to?(m)
@@ -27,6 +28,14 @@ class ActiveTriple
     else
       super
     end
+  end
+  
+  def self.set_connector(connector)
+    @@connector = connector
+  end
+  
+  def self.connector
+    @@connector
   end
   
  
@@ -63,19 +72,12 @@ class ActiveTriple
   end
   
   def get_data
-    resp = by_post
-    begin
-      json = JSON.parse(resp.body)
-      results = json.first[1]
-      results.collect!{|a| Hashie::Mash.new(a)}
-      return results
-    rescue JSON::ParserError => e
-      if /No stories found for query/ =~ e.message
-        return Array.new
-      else
-        raise e
-      end
-    end
+    connection = self.class.connector.send_data(
+      :binding => self.class.binding_id,
+      :limit => number_of_items,
+      :triples => triples           
+    )  
+    connection.response
   end
   
   def by_post
